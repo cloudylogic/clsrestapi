@@ -1,0 +1,22 @@
+{
+  "name": "clsapi",
+  "version": "1.0.0",
+  "description": "This is the REST server API for the cloudylogic.com website.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ken Lowrie",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.12",
+    "fs-extra": "^3.0.1",
+    "gulp": "^3.9.1",
+    "gulp-cached": "^1.1.1",
+    "gulp-connect-php": "^1.0.1",
+    "gulp-debug": "^3.1.0",
+    "gulp-if": "^2.0.2",
+    "gulp-util": "^3.0.8",
+    "gulp-webserver2": "^0.9.2"
+  }
+}
