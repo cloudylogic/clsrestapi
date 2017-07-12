@@ -1,49 +1,62 @@
 <?php
 
-include_once ("data.php");
+include_once("../includes/creply.php");
+include_once ("reeldata.php");
 
-function returnReels($req){
+class cReelsReply extends cBaseReply {
+	public $numReels;
+	public $reelList;
     
-    $videoList = getVideoList();
-    $videos = Array();
+    public function __construct(){
+		parent::__construct();
 
+        $this->numReels = 0;
+        $this->reelList = Array();
+    }
+
+	public function addReel($vid){
+		$this->reelList[] = $vid;
+		$this->numReels++;
+	}
+}
+
+function addReelsToReply($reelsReply, $videoList, $which=-1)
+{
+    if ($which != -1){
+        $vid = $videoList->getVideo((int)$which);
+        
+        if ($vid != NULL){
+            $reelsReply->addReel($vid);
+            return;
+        }
+    }
     for( $start = 0; $start < $videoList->totalVideos(); ++$start ){
         $vid = $videoList->getNextVideo($start);
 
-        $videos[] = $vid->getTitle();
+        $reelsReply->addReel($vid);
+    }    
+}
+
+function returnReels($reqKeys)
+{
+    $videoList = getDemoReels();
+    $reelsReply = new cReelsReply();
+    
+    $reelsReply->setRestAPIKeys($reqKeys);
+
+    if( 2 == count($reqKeys)){
+        addReelsToReply($reelsReply,$videoList,$reqKeys[1]);
+    } else {
+        addReelsToReply($reelsReply,$videoList);
     }
     
-    $x = [$_SERVER["REQUEST_URI"], $_SERVER["QUERY_STRING"],$req];  //REQUEST_URI
-    
-	$mystr = trim(json_encode([$x,$videos],JSON_HEX_APOS),'"');		//JSON_HEX_TAG doesn't seem to matter...
-	//echo "[$mystr]\n\n";
-	return $mystr;
-//	return str_replace("\n","\\n",htmlspecialchars($htmlStr,ENT_QUOTES|ENT_HTML401,null,false));
-}
-
-function returnLatestReel()
-{
-	$mystr = trim(json_encode(["latest reel"],JSON_HEX_APOS),'"');		//JSON_HEX_TAG doesn't seem to matter...
-	return $mystr;
-}
-
-function returnSpecificReel($which)
-{
-	$mystr = trim(json_encode(["specific reel", $which],JSON_HEX_APOS),'"');		//JSON_HEX_TAG doesn't seem to matter...
-	return $mystr;
+	$jsonReply = trim(json_encode($reelsReply,JSON_HEX_APOS|JSON_PRETTY_PRINT),'"');
+	return $jsonReply;
 }
 
 header('Content-Type: application/json');
 
 $request = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
 
-if (2 == count($request)){
-    if ($request[1] == "0") {
-        echo returnLatestReel();
-    } else {
-        echo returnSpecificReel($request[1]);
-    }
-} else {
-    echo returnReels($request);
-}
+echo returnReels($request);
 ?>
