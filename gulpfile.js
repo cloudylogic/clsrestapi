@@ -8,6 +8,7 @@ var gulp = require('gulp'),
 var env,
 	srcDir,
 	bldRoot,
+	cssSources,
 	phpSources,
 	phpServerSrc,
 	gulpSources,
@@ -18,6 +19,7 @@ srcDir = 'src/';
 bldRoot = 'build/';
 phpServerSrc = [srcDir + 'gulpfiles/phpserver.js'];
 phpSources = [srcDir + '**/*.php'];
+cssSources = [srcDir + '**/*.css'];
 gulpSources = [srcDir + 'gulpfiles/*.js'];
 
 if (env === 'dev'){
@@ -27,6 +29,12 @@ if (env === 'dev'){
 }
 
 console.log('Building clsrestapi in ' + env + ' mode to ' + outDir);
+
+gulp.task( 'css', function() {
+	gulp.src(cssSources)
+        .pipe(cached("csscache"))
+		.pipe(gulp.dest(outDir))
+});
 
 gulp.task('php', function(){
    gulp.src(phpSources,{base: srcDir})
@@ -42,7 +50,8 @@ gulp.task('cpgulpsrc', function(){
 });
 
 gulp.task('watch', function() {
-  gulp.watch(srcDir + '**/*.php', ['php']);
+  gulp.watch(cssSources, ['css']);
+  gulp.watch(phpSources, ['php']);
   gulp.watch(gulpSources,['cpgulpsrc']);
 });
 
@@ -66,7 +75,7 @@ gulp.task('cpgulpphpsrv', function(){
 });
 */
 
-var buildtasks=['php', 'cpgulpsrc'];
+var buildtasks=['php', 'css', 'cpgulpsrc'];
 
 gulp.task('build', buildtasks); 
 
