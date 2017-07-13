@@ -1,0 +1,7 @@
+* Search for TODO's and address them.
+
+
+* Add buttons for testing api variants
+* Add a hidden element to toggle display of output from each API
+* Consider if need the CSS needs to be "processed" in Gulp
+* Add Javascript instead of embedding inside file (if necessary)
