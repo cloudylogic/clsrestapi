@@ -9,8 +9,8 @@ var user = process.env.FTP_USER;
 var password = process.env.FTP_PWD;  
 var host = process.env.FTP_HOST;  
 var port = 21;  
-var localFilesGlob = ['**/*', '!ftpxfer.js'];  
-var remoteFolder = '/public_html/cs'
+var localFilesGlob = ['**/*', '!ftpxfer.js', '!phpserver.js'];  
+var remoteFolder = '/public_html/api'
 
 
 // helper function to build an FTP connection based on our configuration
