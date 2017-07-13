@@ -48,8 +48,8 @@ class cShowcaseVideo extends cVideo {
         $this->roles = new StdClass();
         $this->roles->director = $ro_dir;
         $this->roles->dp = $ro_dp;
-        $this->roles->cam = $ro_cam;
-        $this->roles->ed = $ro_ed;
+        $this->roles->camera = $ro_cam;
+        $this->roles->editor = $ro_ed;
         
         $this->description = $desc;
     }
