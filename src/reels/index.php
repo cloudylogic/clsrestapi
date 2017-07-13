@@ -1,17 +1,22 @@
 <?php
 
+include_once("../includes/versions.php");
 include_once("../includes/creply.php");
 include_once ("reeldata.php");
 
 class cReelsReply extends cBaseReply {
 	public $numReels;
 	public $reelList;
+	public $apiVer;
     
     public function __construct(){
 		parent::__construct();
 
         $this->numReels = 0;
         $this->reelList = Array();
+        
+		$this->apiVer = new cAPIversion(CLSRESTAPI_VER_REELS_NAME,CLSRESTAPI_VER_REELS_API,CLSRESTAPI_VER_REELS_DATA);
+
     }
 
 	public function addReel($vid){

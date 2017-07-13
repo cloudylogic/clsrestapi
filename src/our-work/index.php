@@ -1,15 +1,18 @@
 <?php
 
+include_once("../includes/versions.php");
 include_once("../includes/creply.php");
 include_once ("videodata.php");
 
 class cVideosReply extends cBaseReply {
+	public $apiVer;
 	public $numVideos;
 	public $videoList;
     
     public function __construct(){
 		parent::__construct();
 
+		$this->apiVer = new cAPIversion(CLSRESTAPI_VER_OUR_WORK_NAME,CLSRESTAPI_VER_OUR_WORK_API,CLSRESTAPI_VER_OUR_WORK_DATA);
         $this->numVideos = 0;
         $this->videoList = Array();
     }
@@ -58,5 +61,6 @@ header('Content-Type: application/json');
 
 $request = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
 
+//TODO: SHOULD WE CHECK THAT REQUEST[0] == CLSRESTAPI_VER_OUR_WORK_NAME?
 echo returnVideos($request);
 ?>

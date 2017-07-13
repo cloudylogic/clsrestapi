@@ -1,14 +1,17 @@
 <?php
 
+include_once("../includes/versions.php");
 include_once("../includes/creply.php");
 
 class cAboutUsReply extends cBaseReply {
-
+	public $apiVer;
 	public $description;
 
 	public function __construct(){
 		parent::__construct();
 		
+		$this->apiVer = new cAPIversion(CLSRESTAPI_VER_ABOUT_US_NAME,CLSRESTAPI_VER_ABOUT_US_API,CLSRESTAPI_VER_ABOUT_US_DATA);
+
 		$this->description = "Although Cloudy Logic wasn't officially formed " .
                                "until 2004, we have been creating all types of " .
                                "media content since the late 1990′s. With over " .

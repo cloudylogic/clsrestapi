@@ -1,21 +1,10 @@
 <?php
 
+include_once("../includes/versions.php");
 include_once("../includes/creply.php");
 
 //TODO: Seems like the apiVersion info needs to be kept with the actual api
 //		so that it's more likely to be kept up to date when things are changed.
-
-class cAPIversion {
-    public $apiName;
-    public $apiVersion;
-    public $apiDataVersion;
-    
-    public function __construct($apiName,$apiVersion,$apiDataVersion){
-        $this->apiName = $apiName;
-        $this->apiVersion = $apiVersion;
-        $this->apiDataVersion = $apiDataVersion;
-    }
-}
 
 class cVersionsReply extends cBaseReply {
 	protected $totApis;
@@ -28,11 +17,11 @@ class cVersionsReply extends cBaseReply {
 		parent::__construct();
 
         $this->allApiList = Array();
-        $this->allApiList[] = new cAPIversion("versions",      "1.0", "1.0");
-        $this->allApiList[] = new cAPIversion("reels",         "1.0", "1.0");
-        $this->allApiList[] = new cAPIversion("about-us",      "1.0", "1.0");
-        $this->allApiList[] = new cAPIversion("contact-info",  "1.0", "1.0");
-        $this->allApiList[] = new cAPIversion("our-work",      "1.0", "1.0");
+        $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_VERSIONS_NAME,     CLSRESTAPI_VER_VERSIONS_API, 		CLSRESTAPI_VER_VERSIONS_DATA);
+        $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_REELS_NAME,		CLSRESTAPI_VER_REELS_API, 			CLSRESTAPI_VER_REELS_DATA);
+        $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_ABOUT_US_NAME,     CLSRESTAPI_VER_ABOUT_US_API, 		CLSRESTAPI_VER_ABOUT_US_DATA);
+        $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_CONTACT_INFO_NAME, CLSRESTAPI_VER_CONTACT_INFO_API,	CLSRESTAPI_VER_CONTACT_INFO_DATA);
+        $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_OUR_WORK_NAME,     CLSRESTAPI_VER_OUR_WORK_API, 		CLSRESTAPI_VER_OUR_WORK_DATA);
         
         $this->totApis = count($this->allApiList);
         
