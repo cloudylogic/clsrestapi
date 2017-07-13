@@ -60,6 +60,7 @@ function returnReels($reqKeys)
 }
 
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
 
 $request = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
 
