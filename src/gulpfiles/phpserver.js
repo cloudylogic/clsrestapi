@@ -43,7 +43,7 @@ gulp.task('php', [], function() {
         browserSync({ proxy: '127.0.0.1:8000'});
     });
     
-    gulp.watch([srcDir + '*',srcDir + 'reels/*', srcDir + 'about-us/*',srcDir + 'our-work/*', srcDir + 'contact-info/*']).on('change', function () {
+    gulp.watch([srcDir + '*',srcDir + 'css/*', srcDir + 'reels/*', srcDir + 'about-us/*',srcDir + 'our-work/*', srcDir + 'contact-info/*']).on('change', function () {
         browserSync.reload('');
     });
 });
