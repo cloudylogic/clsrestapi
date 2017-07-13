@@ -71,7 +71,18 @@ The /contact-info API returns an array of contact information for Cloudy Logic S
 ##### Examples
 [api.cloudylogic.com/contact-info](http://api.cloudylogic.com/contact-info) - Returns contact information for Cloudy Logic
 
-The intent behind this API is to .
+##### Sample Return Data
+phone
+email
+social-media \[
+	facebook
+	twitter
+	vimeo
+	instagram? - how to add others w/o breaking the api?
+\]
+mailing address
+
+This API returns the contact information for the business. This includes the typical data, such as mailing address, phone and email, as well as the various social media contacts.
 
 #### api.cloudylogic.com/reels\[ID\#\]
 
