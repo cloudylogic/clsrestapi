@@ -2,6 +2,9 @@
 
 include_once("../includes/creply.php");
 
+//TODO: Seems like the apiVersion info needs to be kept with the actual api
+//		so that it's more likely to be kept up to date when things are changed.
+
 class cAPIversion {
     public $apiName;
     public $apiVersion;
@@ -53,6 +56,7 @@ class cVersionsReply extends cBaseReply {
     
     public function addAllApiVersions(){
         $this->apiList = $this->allApiList;
+        $this->numApis = count($this->apiList);
     }
 }
 
