@@ -1,0 +1,7 @@
+Header set Access-Control-Allow-Origin "*"
+RewriteEngine On
+RewriteRule ^reels\/(.*) reels/index.php [NC,L]
+RewriteRule ^versions\/(.*) versions/index.php [NC,L]
+RewriteRule ^about-us\/(.*) about-us/index.php [NC,L]
+RewriteRule ^contact-info\/(.*) contact-info/index.php [NC,L]
+RewriteRule ^our-work\/(.*) our-work/index.php [NC,L]
