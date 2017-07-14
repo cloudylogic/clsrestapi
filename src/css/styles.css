@@ -1,16 +1,7 @@
 /* styles.css */
 
-/* @import _variables.css */
-
 @import 'https://fonts.googleapis.com/css?family=Raleway:300,600,700';
 
-/* color scheme hues */
-
-/* generic colors */
-
-/* TODO: Figure out exactly what I want these widths to bet set to */
-/* @import _mixins.css */
-/* @import _base.css */
 html {
     font-size: 62.5%;/* Make is so 1.0rem is font size 10 */
     box-sizing: border-box;
@@ -39,29 +30,21 @@ h1, h2, h3, h4, h5, h6 {
     font-family: Raleway,Helvetica,Arial,sans-serif;
     color: rgb(0, 90, 90);
 }
-img {
-    display: block;
-    max-width: 100%;
-}
-
 em {
+    padding-right: .3rem;
 	font-weight: bold;
 	text-decoration: underline;
 }
 
-/* @import modules/_header.css */
-
-/* TODO: Fix this $color-header-text */
-
 #mainheader {
-    color: $color-header-text;
+    color: rgb(85, 85, 85);
 }
 
-/* #mainheader */
+/* push the #main section below the fixed nav bar */
 #main {
-    margin-top: 6rem;/* .container class */
+    margin-top: 6rem;
 }
-/* push it below a fixed nav bar */
+/* .container class */
 #main .container .heading h3 {
     font-weight: 600;
     margin: 1rem 0;
@@ -78,18 +61,24 @@ em {
     font-size: 1.4rem;
     padding: 0 1rem;
 }
+/* Make my buttons a fixed width so it looks nice, and is easy to press on mobile devices */
 input {
     width: 150px;
     margin: 10px;
 }
+/* 
+** The #reply ID is used to tag the pre element to make it easy to replace the code with
+** the pretty printed JavaScript object returned by the JSON call.
+*/
 #reply {
 	font-family: Courier-new, Courier;
     font-size: 1.2rem;
     padding: 0 1rem;
     margin: 1rem;
 }
+
 pre {
-	white-space: pre-wrap;
+	white-space: pre-wrap;  /* Wrap the text for the long strings that are returned... */
 }
 
 .footer {
@@ -104,9 +93,8 @@ pre {
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
-/* TODO: another missing color variable */
 .footer a {
-    color: $color-lk-main;
+    color: rgb(51, 122, 183);
 }
 .footer a:hover, .footer a:active {
     color: rgb(0, 0, 102);
