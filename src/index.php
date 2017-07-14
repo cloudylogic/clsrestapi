@@ -38,9 +38,9 @@
         </div><!-- navbar-header -->
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href="reels/">reels</a></li>
-            <li><a href="our-work/">our-work</a></li>
-            <li><a href="about-us/">about-us</a></li>
+            <li class="active"><a href="https://kenlowrie.com/">Me</a></li>
+            <li><a href="https://klowrie.net/">Portfolio</a></li>
+            <li><a href="http://resume.klowrie.net/">Resume</a></li>
           </ul>
         </div><!-- #navbar navbar-collapse collapse -->
       </div><!-- container -->
@@ -110,14 +110,14 @@
     	** Once the page has fully loaded, attach the REST API call to the button click
         ** The first parameter is the element ID, the second is the URL to invoke the API
         */
-        attachRESTapi('#reels', 'reels');
-        attachRESTapi('#reels_0', 'reels/0');
-        attachRESTapi('#our-work', 'our-work');
-        attachRESTapi('#our-work_3', 'our-work/3');
-        attachRESTapi('#about-us', 'about-us');
-        attachRESTapi('#contact-info', 'contact-info');
-        attachRESTapi('#versions', 'versions');
-        attachRESTapi('#versions_reels', 'versions/reels');
+        attachRESTapi('#reels', 'reels/');
+        attachRESTapi('#reels_0', 'reels/0/');
+        attachRESTapi('#our-work', 'our-work/');
+        attachRESTapi('#our-work_3', 'our-work/3/');
+        attachRESTapi('#about-us', 'about-us/');
+        attachRESTapi('#contact-info', 'contact-info/');
+        attachRESTapi('#versions', 'versions/');
+        attachRESTapi('#versions_reels', 'versions/reels/');
         // This function just resets the API return area for convenience
         resetReply('#reset');
     });
@@ -138,7 +138,17 @@
     function attachRESTapi(id,apiName){
         $(id).click(function(){
             $.ajax({
-                url: '/' + apiName,
+                /*
+                ** If you use the full url here (http://api.cloudylogic.com), then
+                ** it tests the x-domain CORS support when running it locally (localhost)
+                ** and then calling out to my server. However, that means that I always
+                ** have to have the FTP process running, otherwise I won't see local
+                ** changes in real time. So, I opt for running '/' instead, which basically
+                ** forces it to load the API files from the localhost cache instead, and
+                ** this also works if I load it in the browser from http://api.cloudylogic.com,
+                ** since it's basically just requesting the resource using a relative path.
+                */
+                url: '/' + apiName,     // http://api.cloudylogic.com See comment ^^^^^
                 method: 'GET'
             }).then(function(data) {
                 console.log(data);		// for debug purposes
