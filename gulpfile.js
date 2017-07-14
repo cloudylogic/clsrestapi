@@ -17,6 +17,7 @@ var env,
 env = process.env.NODE_ENV || 'dev';
 srcDir = 'src/';
 bldRoot = 'build/';
+miscSources = [srcDir + '.htaccess'];
 phpServerSrc = [srcDir + 'gulpfiles/phpserver.js'];
 phpSources = [srcDir + '**/*.php'];
 cssSources = [srcDir + '**/*.css'];
@@ -49,10 +50,18 @@ gulp.task('cpgulpsrc', function(){
   	.pipe(gulp.dest(outDir));
 });
 
+gulp.task('cpmiscsrc', function(){
+   gulp.src(miscSources)
+    .pipe(cached("misccache"))
+    .pipe(debug())
+  	.pipe(gulp.dest(outDir));
+});
+
 gulp.task('watch', function() {
   gulp.watch(cssSources, ['css']);
   gulp.watch(phpSources, ['php']);
   gulp.watch(gulpSources,['cpgulpsrc']);
+  gulp.watch(miscSources,['cpmiscsrc']);
 });
 
 /*
@@ -75,7 +84,7 @@ gulp.task('cpgulpphpsrv', function(){
 });
 */
 
-var buildtasks=['php', 'css', 'cpgulpsrc'];
+var buildtasks=['php', 'css', 'cpgulpsrc', 'cpmiscsrc'];
 
 gulp.task('build', buildtasks); 
 
