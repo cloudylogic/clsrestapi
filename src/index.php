@@ -57,17 +57,25 @@
         
         <div class="content">
             <h4>CLS REST API</h4>
-            <p>Click on the links below to test each API</p>
-            <input type="button" value="reels" id="reels">
+            <p>Click on the buttons below to test each API. Buttons in the first column are the primary APIs. Buttons in the second column, when present, illustrate passing a parameter to the API by embedding it in the URL.</p>
+            <input type="button" class="btn btn-primary" value="reels" id="reels">
+            <input type="button" class="btn btn-secondary" value="reels/0" id="reels_0">
             <br />
-            <input type="button" value="about-us" id="about-us">
+            <input type="button" class="btn btn-primary" value="about-us" id="about-us">
             <br />
-            <input type="button" value="versions" id="versions">
+            <input type="button" class="btn btn-primary" value="versions" id="versions">
+            <input type="button" class="btn btn-secondary" value="versions/reels" id="versions_reels">
             <br />
-            <input type="button" value="contact-info" id="contact-info">
+            <input type="button" class="btn btn-primary" value="contact-info" id="contact-info">
             <br />
-            <input type="button" value="our-work" id="our-work">
+            <input type="button" class="btn btn-primary" value="our-work" id="our-work">
+            <input type="button" class="btn btn-secondary" value="our-work/3" id="our-work_3">
             <br />
+            <input type="button" class="btn btn-info" value="reset" id="reset">
+            <br />
+        </div>
+        <div>
+        	<pre id="reply">API return data here</pre>
         </div>
     </div><!-- <div class="container"> -->
 </section>
@@ -102,11 +110,21 @@
             });
         });*/
         attachRESTapi('#reels', 'reels');
+        attachRESTapi('#reels_0', 'reels/0');
         attachRESTapi('#our-work', 'our-work');
+        attachRESTapi('#our-work_3', 'our-work/3');
         attachRESTapi('#about-us', 'about-us');
         attachRESTapi('#contact-info', 'contact-info');
         attachRESTapi('#versions', 'versions');
+        attachRESTapi('#versions_reels', 'versions/reels');
+        resetReply('#reset');
     });
+    
+    function resetReply(id){
+        $(id).click(function(){
+            document.getElementById("reply").innerHTML = "API return data here";
+        });
+    }
     
     function attachRESTapi(id,apiName){
         $(id).click(function(){
@@ -114,12 +132,14 @@
                 url: '/' + apiName,
                 method: 'GET'
             }).then(function(data) {
-                console.log(data);
+                //console.log(data);
+                var str = JSON.stringify(data,null,2);
+                //$('#reply').replaceWith("<div id=\"reply\"><pre>" + str + "</pre></div>");
+                document.getElementById("reply").innerHTML = str;
             });
         });
     }
 </script>
-
 
 </body>
 </html>
