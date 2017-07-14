@@ -28,4 +28,24 @@ class cAPIversion {
     }
 }
 
+function parseAPIparameters($apiName)
+{
+    header('Content-Type: application/json');
+
+    $apiRequest = new StdClass();
+    $apiRequest->parseOK = true;
+        
+    $apiRequest->reqKeys = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
+
+    if (count($apiRequest->reqKeys) < 1 || strcasecmp($apiRequest->reqKeys[0],$apiName)){
+        $name = count($apiRequest->reqKeys) ? $apiRequest->reqKeys[0] : "Not Specified";
+    
+        $apiRequest->parseOK = false;
+        $apiRequest->errormessage = "Expected API name of '$apiName' but got '$name' instead";
+    
+        echo trim(json_encode($apiRequest,JSON_HEX_APOS|JSON_PRETTY_PRINT),'"');
+    }
+    return $apiRequest;
+}
+
 ?>
