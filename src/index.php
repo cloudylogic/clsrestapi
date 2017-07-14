@@ -51,31 +51,37 @@
 <section id=main class="section">
     <div class="container">
         <div class="heading">
-            <h3>Cloudy Logic Studios REST API Front-End</h3>
-            <p>Welcome to the front-end app for the Cloudy Logic Studios REST API (aka CLSRESTAPI)! This app allows you to <em>manually test</em> the various APIs that are part of this system.</p>
+            <h3>CLS REST API Front-End</h3>
+            <p>Welcome to the front-end app for the Cloudy Logic Studios REST API (aka CLSRESTAPI)! This app allows you to <em>manually test</em> the various APIs that are part of this system. This app sits on the server as a convenient way to investigate the return data from the various API calls.</p>
         </div>
         
         <div class="content">
-            <h4>CLS REST API</h4>
-            <p>Click on the buttons below to test each API. Buttons in the first column are the primary APIs. Buttons in the second column, when present, illustrate passing a parameter to the API by embedding it in the URL.</p>
-            <input type="button" class="btn btn-primary" value="reels" id="reels">
-            <input type="button" class="btn btn-secondary" value="reels/0" id="reels_0">
-            <br />
-            <input type="button" class="btn btn-primary" value="about-us" id="about-us">
-            <br />
-            <input type="button" class="btn btn-primary" value="versions" id="versions">
-            <input type="button" class="btn btn-secondary" value="versions/reels" id="versions_reels">
-            <br />
-            <input type="button" class="btn btn-primary" value="contact-info" id="contact-info">
-            <br />
-            <input type="button" class="btn btn-primary" value="our-work" id="our-work">
-            <input type="button" class="btn btn-secondary" value="our-work/3" id="our-work_3">
-            <br />
-            <input type="button" class="btn btn-info" value="reset" id="reset">
-            <br />
+            <h4>Invoking the CLS REST API</h4>
+            <p>Click on the buttons below to test each API. Buttons in the first column are the primary APIs. Buttons in the second column, when present, illustrate passing a parameter to the API by embedding it in the URL. The returned object is displayed (pretty printed) in the area just below the buttons for quick review. You can reset the text area using the <em>reset</em> button.</p>
+            <div>
+				<input type="button" class="btn btn-primary" value="reels" id="reels">
+				<input type="button" class="btn btn-secondary" value="reels/0" id="reels_0">
+			</div>
+            <div>
+				<input type="button" class="btn btn-primary" value="about-us" id="about-us">
+			</div>
+            <div>
+				<input type="button" class="btn btn-primary" value="versions" id="versions">
+				<input type="button" class="btn btn-secondary" value="versions/reels" id="versions_reels">
+			</div>
+            <div>
+				<input type="button" class="btn btn-primary" value="contact-info" id="contact-info">
+			</div>
+            <div>
+				<input type="button" class="btn btn-primary" value="our-work" id="our-work">
+				<input type="button" class="btn btn-secondary" value="our-work/3" id="our-work_3">
+			</div>
+            <div>
+				<input type="button" class="btn btn-info" value="reset" id="reset">
+            </div>
         </div>
         <div>
-        	<pre id="reply">API return data here</pre>
+        	<pre id="reply">API return object is display here.</pre>
         </div>
     </div><!-- <div class="container"> -->
 </section>
@@ -100,15 +106,10 @@
 
 <script>
     $(document).ready(function(){
-        /*$('#reels').click(function(){
-            var root = '';  // http://api.cloudylogic.com
-            $.ajax({
-              url: root + '/reels',
-              method: 'GET'
-            }).then(function(data) {
-              console.log(data);
-            });
-        });*/
+    	/*
+    	** Once the page has fully loaded, attach the REST API call to the button click
+        ** The first parameter is the element ID, the second is the URL to invoke the API
+        */
         attachRESTapi('#reels', 'reels');
         attachRESTapi('#reels_0', 'reels/0');
         attachRESTapi('#our-work', 'our-work');
@@ -117,24 +118,31 @@
         attachRESTapi('#contact-info', 'contact-info');
         attachRESTapi('#versions', 'versions');
         attachRESTapi('#versions_reels', 'versions/reels');
+        // This function just resets the API return area for convenience
         resetReply('#reset');
     });
     
+    /*
+    ** Reset the text inside the reply area to it's initial state
+    */
     function resetReply(id){
         $(id).click(function(){
-            document.getElementById("reply").innerHTML = "API return data here";
+            document.getElementById("reply").innerHTML = "API return object is display here.";
         });
     }
-    
+    /*
+    ** Invoke the REST API using the jQuery AJAX call. Display the return object
+    ** to the console log (for debugging), and then pretty print it using the
+    ** JSON.stringify() API and replace the text inside the reply area with that string.
+    */
     function attachRESTapi(id,apiName){
         $(id).click(function(){
             $.ajax({
                 url: '/' + apiName,
                 method: 'GET'
             }).then(function(data) {
-                //console.log(data);
+                console.log(data);		// for debug purposes
                 var str = JSON.stringify(data,null,2);
-                //$('#reply').replaceWith("<div id=\"reply\"><pre>" + str + "</pre></div>");
                 document.getElementById("reply").innerHTML = str;
             });
         });
