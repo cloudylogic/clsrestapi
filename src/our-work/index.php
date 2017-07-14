@@ -57,10 +57,10 @@ function returnVideos($reqKeys)
 	return $jsonReply;
 }
 
-header('Content-Type: application/json');
+$request = parseAPIparameters(CLSRESTAPI_VER_OUR_WORK_NAME);
 
-$request = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
+if( $request->parseOK ){
+    echo returnVideos($request->reqKeys);
+}
 
-//TODO: SHOULD WE CHECK THAT REQUEST[0] == CLSRESTAPI_VER_OUR_WORK_NAME?
-echo returnVideos($request);
 ?>

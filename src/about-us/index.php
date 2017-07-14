@@ -33,9 +33,10 @@ function returnAboutUs($reqKeys)
 	return $jsonReply;
 }
 
-header('Content-Type: application/json');
+$request = parseAPIparameters(CLSRESTAPI_VER_ABOUT_US_NAME);
 
-$request = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
+if( $request->parseOK ){
+    echo returnAboutUs($request->reqKeys);
+}
 
-echo returnAboutUs($request);
 ?>

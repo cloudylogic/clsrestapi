@@ -60,9 +60,10 @@ function returnContactInfo($reqKeys)
 	return $jsonReply;
 }
 
-header('Content-Type: application/json');
+$request = parseAPIparameters(CLSRESTAPI_VER_CONTACT_INFO_NAME);
 
-$request = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
+if( $request->parseOK ){
+    echo returnContactInfo($request->reqKeys);
+}
 
-echo returnContactInfo($request);
 ?>
