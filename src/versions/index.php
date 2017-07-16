@@ -7,11 +7,10 @@ class cVersionsReply extends cBaseReply {
 	protected $totApis;
     protected $allApiList;
 
-	public $numApis;
-    public $apiList;
+    public $apiObj;
     
     public function __construct(){
-		parent::__construct();
+		parent::__construct(new cAPIversion(CLSRESTAPI_VER_VERSIONS_NAME,CLSRESTAPI_VER_VERSIONS_API,CLSRESTAPI_VER_VERSIONS_DATA));
 
         $this->allApiList = Array();
         $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_VERSIONS_NAME,     CLSRESTAPI_VER_VERSIONS_API, 		CLSRESTAPI_VER_VERSIONS_DATA);
@@ -21,14 +20,15 @@ class cVersionsReply extends cBaseReply {
         $this->allApiList[] = new cAPIversion(CLSRESTAPI_VER_OUR_WORK_NAME,     CLSRESTAPI_VER_OUR_WORK_API, 		CLSRESTAPI_VER_OUR_WORK_DATA);
         
         $this->totApis = count($this->allApiList);
-        
-        $this->numApis = 0;
-        $this->apiList = Array();
+
+        $this->apiObj = new StdClass();        
+        $this->apiObj->numApis = 0;
+        $this->apiObj->apiList = Array();
     }
     
     public function addApiVersion($api){
-        $this->apiList[] = $api;
-        $this->numApis++;
+        $this->apiObj->apiList[] = $api;
+        $this->apiObj->numApis++;
     }
     
     public function getApiVersion($apiName){
@@ -41,8 +41,8 @@ class cVersionsReply extends cBaseReply {
     }
     
     public function addAllApiVersions(){
-        $this->apiList = $this->allApiList;
-        $this->numApis = count($this->apiList);
+        $this->apiObj->apiList = $this->allApiList;
+        $this->apiObj->numApis = count($this->apiObj->apiList);
     }
 }
 
@@ -59,26 +59,23 @@ function addVersionsToReply($versionsReply, $which="*")
     $versionsReply->addAllApiVersions();
 }
 
-function returnVersions($reqKeys)
+function returnVersions()
 {
-    $versionsReply = new cVersionsReply($_SERVER["REQUEST_URI"], $_SERVER["QUERY_STRING"]);
-    
-    $versionsReply->setRestAPIKeys($reqKeys);
-    
-    if( 2 == count($reqKeys)){
-        addVersionsToReply($versionsReply,$reqKeys[1]);    
-    } else {
-        addVersionsToReply($versionsReply);    
+    $versionsReply = new cVersionsReply();
+
+    if( $versionsReply->parseOK() ){    
+        if( 2 == $versionsReply->numRestApiKeys()) {
+            addVersionsToReply($versionsReply,$versionsReply->getRestApiKey(1));    
+        } else {
+            addVersionsToReply($versionsReply);    
+        }
     }
-    
+
 	$jsonReply = trim(json_encode($versionsReply,JSON_HEX_APOS|JSON_PRETTY_PRINT),'"');
 	return $jsonReply;
 }
 
-$request = parseAPIparameters(CLSRESTAPI_VER_VERSIONS_NAME);
-
-if( $request->parseOK ){
-    echo returnVersions($request->reqKeys);
-}
+header('Content-Type: application/json');
+echo returnVersions();
 
 ?>

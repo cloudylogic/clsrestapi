@@ -4,15 +4,13 @@ include_once("../includes/versions.php");
 include_once("../includes/creply.php");
 
 class cAboutUsReply extends cBaseReply {
-	public $apiVer;
-	public $aboutus;
+	public $apiObj;
 
 	public function __construct(){
-		parent::__construct();
+		parent::__construct(new cAPIversion(CLSRESTAPI_VER_ABOUT_US_NAME,CLSRESTAPI_VER_ABOUT_US_API,CLSRESTAPI_VER_ABOUT_US_DATA));
 		
-		$this->apiVer = new cAPIversion(CLSRESTAPI_VER_ABOUT_US_NAME,CLSRESTAPI_VER_ABOUT_US_API,CLSRESTAPI_VER_ABOUT_US_DATA);
-
-		$this->aboutus = 
+		$this->apiObj = new StdClass();
+		$this->apiObj->aboutus = 
 		     "Although Cloudy Logic wasn't officially formed until 2004, we have been creating all types of " .
              "media content since the late 1990′s. With over 30 years of combined experience, you can be certain " .
              "that we can create exactly what you’re looking for.\r\nLet us help you take your idea from concept to completion, " .
@@ -23,20 +21,15 @@ class cAboutUsReply extends cBaseReply {
     }
 }
 
-function returnAboutUs($reqKeys)
+function returnAboutUs()
 {
     $aboutUsReply = new cAboutUsReply();
-    
-    $aboutUsReply->setRestAPIKeys($reqKeys);
-    
+        
 	$jsonReply = trim(json_encode($aboutUsReply,JSON_HEX_APOS|JSON_PRETTY_PRINT),'"');
 	return $jsonReply;
 }
 
-$request = parseAPIparameters(CLSRESTAPI_VER_ABOUT_US_NAME);
-
-if( $request->parseOK ){
-    echo returnAboutUs($request->reqKeys);
-}
+header('Content-Type: application/json');
+echo returnAboutUs();
 
 ?>

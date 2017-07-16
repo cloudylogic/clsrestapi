@@ -5,23 +5,19 @@ include_once("../includes/creply.php");
 include_once ("reeldata.php");
 
 class cReelsReply extends cBaseReply {
-	public $numReels;
-	public $reelList;
-	public $apiVer;
+	public $apiObj;
     
     public function __construct(){
-		parent::__construct();
+		parent::__construct(new cAPIversion(CLSRESTAPI_VER_REELS_NAME,CLSRESTAPI_VER_REELS_API,CLSRESTAPI_VER_REELS_DATA));
 
-        $this->numReels = 0;
-        $this->reelList = Array();
-        
-		$this->apiVer = new cAPIversion(CLSRESTAPI_VER_REELS_NAME,CLSRESTAPI_VER_REELS_API,CLSRESTAPI_VER_REELS_DATA);
-
+        $this->apiObj = new StdClass();
+        $this->apiObj->numReels = 0;
+        $this->apiObj->reelList = Array();   
     }
 
 	public function addReel($vid){
-		$this->reelList[] = $vid;
-		$this->numReels++;
+		$this->apiObj->reelList[] = $vid;
+		$this->apiObj->numReels++;
 	}
 }
 
@@ -42,27 +38,24 @@ function addReelsToReply($reelsReply, $videoList, $which=-1)
     }    
 }
 
-function returnReels($reqKeys)
+function returnReels()
 {
     $videoList = getDemoReels();
     $reelsReply = new cReelsReply();
     
-    $reelsReply->setRestAPIKeys($reqKeys);
-
-    if( 2 == count($reqKeys)){
-        addReelsToReply($reelsReply,$videoList,$reqKeys[1]);
-    } else {
-        addReelsToReply($reelsReply,$videoList);
+    if( $reelsReply->parseOK() ){
+        if( 2 == $reelsReply->numRestApiKeys()){
+            addReelsToReply($reelsReply,$videoList,$reelsReply->getRestApiKey(1));
+        } else {
+            addReelsToReply($reelsReply,$videoList);
+        }
     }
     
 	$jsonReply = trim(json_encode($reelsReply,JSON_HEX_APOS|JSON_PRETTY_PRINT),'"');
 	return $jsonReply;
 }
 
-$request = parseAPIparameters(CLSRESTAPI_VER_REELS_NAME);
-
-if( $request->parseOK ){
-    echo returnReels($request->reqKeys);
-}
+header('Content-Type: application/json');
+echo returnReels();
 
 ?>
