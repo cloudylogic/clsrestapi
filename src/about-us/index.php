@@ -13,9 +13,9 @@ class cAboutUsReply extends cBaseReply {
 		$this->apiObj->aboutus = 
 		     "Although Cloudy Logic wasn't officially formed until 2004, we have been creating all types of " .
              "media content since the late 1990′s. With over 30 years of combined experience, you can be certain " .
-             "that we can create exactly what you’re looking for.\r\nLet us help you take your idea from concept to completion, " .
+             "that we can create exactly what you’re looking for. Let us help you take your idea from concept to completion, " .
              "whether it’s a business profile, narrative film, commercial, music video or documentary. Or, if you " .
-             "already have your concept, we can simply provide production and/or post-production services.\r\n" .
+             "already have your concept, we can simply provide production and/or post-production services. " .
              "Whatever your needs are, we are eager to help you achieve them. Go ahead and give us a call at 512-710-7257 or email " .
              "us at info@cloudylogic.com for more information or to get a quote for your project.";
     }
