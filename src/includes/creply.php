@@ -1,21 +1,21 @@
 <?php
 
 class cBaseReply {
-    public $debugInfo;
+    public $dbgObj;
     public $apiVer;
     
     public function __construct($apiVer){
         $this->apiVer = $apiVer;
-        $this->debugInfo = new StdClass();
-        $this->debugInfo->traceMsgQ = Array();
-        $this->debugInfo->parseOK = true;
-        $this->debugInfo->request_uri = $_SERVER["REQUEST_URI"];
-        $this->debugInfo->query_string = $_SERVER["QUERY_STRING"];
-        $this->debugInfo->restAPIkeys = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
-        $apiNameFromUri = $this->debugInfo->restAPIkeys[0];
+        $this->dbgObj = new StdClass();
+        $this->dbgObj->traceMsgQ = Array();
+        $this->dbgObj->parseOK = true;
+        $this->dbgObj->request_uri = $_SERVER["REQUEST_URI"];
+        $this->dbgObj->query_string = $_SERVER["QUERY_STRING"];
+        $this->dbgObj->restAPIkeys = preg_split('/\//',$_SERVER["REQUEST_URI"],-1,PREG_SPLIT_NO_EMPTY);
+        $apiNameFromUri = $this->dbgObj->restAPIkeys[0];
         $apiNameFromVerObj = $apiVer->apiName;
-        if (count($this->debugInfo->restAPIkeys) < 1 || strcasecmp($apiNameFromUri,$apiNameFromVerObj)){
-            $this->debugInfo->parseOK = false;
+        if (count($this->dbgObj->restAPIkeys) < 1 || strcasecmp($apiNameFromUri,$apiNameFromVerObj)){
+            $this->dbgObj->parseOK = false;
             $this->addTraceMessage("Expected API name of '$apiNameFromVerObj' but got '$apiNameFromUri' instead");
         }
     }
@@ -27,20 +27,20 @@ class cBaseReply {
 		**
 		**	From an instance, like this: $instance->addTraceMessage("your msg");
 		*/    
-    	$this->debugInfo->traceMsgQ[] = $msg;
+    	$this->dbgObj->traceMsgQ[] = $msg;
     }
 
     public function parseOK(){
-        return $this->debugInfo->parseOK;
+        return $this->dbgObj->parseOK;
     }
 
     public function numRestApiKeys(){
-        return count($this->debugInfo->restAPIkeys);
+        return count($this->dbgObj->restAPIkeys);
     } 
     
     public function getRestApiKey($which){
-        if( $which < count($this->debugInfo->restAPIkeys) ){
-            return $this->debugInfo->restAPIkeys[$which];
+        if( $which < count($this->dbgObj->restAPIkeys) ){
+            return $this->dbgObj->restAPIkeys[$which];
         }
         return NULL;
     } 
