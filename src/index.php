@@ -52,6 +52,7 @@
         <div class="heading">
             <h3>CLS REST API Front-End</h3>
             <p>Welcome to the front-end app for the Cloudy Logic Studios REST API (aka CLSRESTAPI)! This app allows you to <em>manually test</em> the various APIs that are part of this system. This app sits on the server as a convenient way to investigate the return data from the various API calls.</p>
+            <p>Alternatively, you might want to take a look at the testCLSrest.py script also available on GitHub, as it allows you to test all of the APIs at once, or just a single one. Check it out here.</p>
         </div>
         
         <div class="content">
