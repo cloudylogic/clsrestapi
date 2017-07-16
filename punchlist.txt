@@ -1,4 +1,7 @@
 
 * Comment the crap out of the code and classes
-* Call each API in the python client tester and validate input
+* Comment the testCLSrest.py test code
+* Put the link to the GitHub repository for testCLSrest.py in the index.php for the server.
+* Push the server REST API to GitHub
+* Push the test Python script to GitHub
 
