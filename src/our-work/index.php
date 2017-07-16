@@ -5,13 +5,11 @@ include_once("../includes/creply.php");
 include_once ("videodata.php");
 
 class cVideosReply extends cBaseReply {
-	//public $apiVer;
 	public $apiObj;
  
     public function __construct(){
 		parent::__construct(new cAPIversion(CLSRESTAPI_VER_OUR_WORK_NAME,CLSRESTAPI_VER_OUR_WORK_API,CLSRESTAPI_VER_OUR_WORK_DATA));
 
-		//$this->apiVer = new cAPIversion(CLSRESTAPI_VER_OUR_WORK_NAME,CLSRESTAPI_VER_OUR_WORK_API,CLSRESTAPI_VER_OUR_WORK_DATA);
 		$this->apiObj = new StdClass();
         $this->apiObj->numVideos = 0;
         $this->apiObj->videoList = Array();
