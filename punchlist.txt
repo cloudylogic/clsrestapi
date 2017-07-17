@@ -1,7 +1,5 @@
 
-* Comment the crap out of the code and classes
-* Comment the testCLSrest.py test code
-* Put the link to the GitHub repository for testCLSrest.py in the index.php for the server.
 * Push the server REST API to GitHub
 * Push the test Python script to GitHub
+* Put the link to the GitHub repository for testCLSrest.py in the index.php for the server.
 
