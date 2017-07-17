@@ -3,13 +3,13 @@
 
 Welcome to the REST API source for Cloudy Logic Studios, hosted on [http://api.cloudylogic.com](http://api.cloudylogic.com). The information here should help you understand the REST implementation for the Cloudy Logic Studios domain. If you have questions, or would like to provide feedback and/or to report a bug, feel free to contact the author, Ken Lowrie, at [www.kenlowrie.com](http://www.kenlowrie.com/).
 
-### Attributions
+#### Attributions
 
 Attributions here...
 
 <a id="install">&nbsp;</a>
 
-#### Installing this app to your server
+### Installing this app to your server
 
 This is a [Gulp](http://gulpjs.com/) project, so you'll need [Node.js](https://nodejs.org/en/) installed on your build machine in order to put the distribution together from the sources in an automated fashion. Follow the link above to learn about Gulp and how to set it up on your system, just make sure to install and configure Node.js first. 
 
@@ -22,7 +22,7 @@ Then, run "gulp" to build a development version, or "NODE_ENV=rel gulp" to build
 Running Gulp will create a "Build/dev" or "Build/rel" depending on how the NODE_ENV variable is set. Go into the corresponding directory, and then transfer all the files up to your server, maintaining the directory structure, and you'll be all set!
 
 <a id="needapache">&nbsp;</a>
-##### Special Note about Apache requirement
+#### Special Note about Apache requirement
 
 This code was built to run on Apache's web server, and relies on a feature in httpd in order to make it work, the .htaccess file. This file allows you to do some specialized processing by the web server, freeing me up front handling it in the code. In my case:
 
@@ -34,7 +34,7 @@ If you are not using Apache, then you'll have to figure out how to implement som
 
 That's it! If you run into any problems, feel free to contact me for assistance.
 
-#### Why a REST API for the Cloudy Logic App?
+### Why a REST API for the Cloudy Logic App?
 
 The original Cloudy Logic Studios app was written in Objective C for the iOS platform. For some time, I've been wanting to do an Android version of the app, as well as convert it to Swift for iOS. One of the biggest disadvantages to the original version is that it relied on hard-coded data for the embedded video content, as well as the contact information, etc. So anytime I want/need to change it, I have to rebuild the app and redeploy. This is not good.
 
@@ -104,6 +104,8 @@ There are three (3) primary objects that are always at the root level, and all b
 And that's about all there is to the implementation of the CLS REST API. In the sections that follow, I'll go over each one of the APIs, what they return, and how to use them.
 
 <a id="versions">&nbsp;</a>
+### API: versions
+
 #### http://api.cloudylogic.com/versions/ [apiname/]
 
 The *versions* API returns an array of objects that describe the implemention and data version for each of the CLS REST APIs. 
@@ -169,6 +171,8 @@ To return version data for the *reels* API only:
 The intent behind the *versions* API is to indicate to a client that has cached prior return data whether or not there is any need to request an update, or if it's okay to simply use the locally cached data. For example, If my app wants to display the latest demo reel for Cloudy Logic, and I've previously downloaded the demo reel data via the *reels* API, as long as the current data version for *reels* is the same as what is was when I originally downloaded it, there is no need for me to re-request the demo reel information. Instead, I can simply play the demo reel using the URL I already have cached locally.
 
 <a id="about-us">&nbsp;</a>
+### API: about-us
+
 #### http://api.cloudylogic.com/about-us/
 
 The *about-us* API returns a text description for Cloudy Logic Studios. 
@@ -177,7 +181,7 @@ The *about-us* API returns a text description for Cloudy Logic Studios.
 To return some background information about Cloudy Logic:
 <code>[http://api.cloudylogic.com/about-us/](http://api.cloudylogic.com/about-us/)</code>
 
-#### Sample Return data
+##### Sample Return data
 
 <pre>
 {
@@ -204,6 +208,8 @@ To return some background information about Cloudy Logic:
 This API is used to return information about the company, suitable for display on the "About Us" page of a website, or inside a client application.
 
 <a id="contact-info">&nbsp;</a>
+### API: contact-info
+
 #### http://api.cloudylogic.com/contact-info/
 
 The *contact-info* API returns an array of contact information for Cloudy Logic Studios. 
@@ -265,6 +271,8 @@ To return the contact information for Cloudy Logic:
 This API returns the contact information for the business. This includes the typical data, such as mailing address, phone and email, as well as the various social media contacts. A webpage might display this information on the "Contact" page, or a client application could use it to request information and/or support.
 
 <a id="reels">&nbsp;</a>
+### API: reels
+
 #### http://api.cloudylogic.com/reels/ [ID#/]
 
 The *reels* API returns information about one or all demo reels for Cloudy Logic Studios. If the optional [ID#] is supplied, then the information for that specific demo reel is returned instead. If the ID number provided is invalid, then information about all demo reels is returned.
@@ -346,6 +354,8 @@ To return information for the second latest Cloudy Logic demo reel:
 This API could be used to display a table of demo reels for the company, or perhaps to just display the latest demo reel. In the original iOS app for Cloudy Logic Studios, the main tab of the application had the demo reel video window, along with buttons that would take the user to the various social media sites. To implement this same functionality using the CLS REST API, you could call the *reels/0/* API and the *contact-info/* API, and use the returned data to dynamically build a page with that content on it.
 
 <a id="our-work">&nbsp;</a>
+### API: our-work
+
 #### http://api.cloudylogic.com/our-work/ [ID#/]
 
 The *our-work* API returns an array of objects that describe videos which showcase some of Cloudy Logic Studios' past projects. It can also return more detailed information on a specific video, if it's ID is passed in.
@@ -403,7 +413,7 @@ reset
 
 The intent behind this API is to provide a client with a list of videos that showcase the company's past projects. That data could be used to construct a table with thumbnails and short descriptions, perhaps using the *type* data element, and then if the user selects that row, a subsequent page could display the video along with the long description and a credits list by using the roles for the project.
 
-#### Additional Information
+### Additional Information
 
 The PHP source code is fully documented, and I will add more details later as I get any specific questions about the code. Please feel free to sent comments and suggestions to me so I can improve not only the documentation in the source, but this user guide as well.
 
@@ -412,7 +422,7 @@ Take a look at the [index.php](https://github.com/kenlowrie/clsrestapi/blob/mast
 You may want to check out the Python test code for the CLS REST API, that repository, called [testclsrest](https://github.com/kenlowrie/testclsrest) is also available on [GitHub](https://github.com/).
 
 <a id="manualinstall">&nbsp;</a>
-#### Manual installation
+### Manual installation
 
 If you would like to manually install this code on your server or development machine, follow these instructions and hope for the best! Just kidding, it's pretty straightforward, and I'll try to keep this up to date if things change, but I can't make any promises on that. In other words, you might need to put on your debug hat if the instructions do not work. :)
 
@@ -436,7 +446,7 @@ If you would like to manually install this code on your server or development ma
 
 That should be it. Good luck!
 
-#### What's Next?
+### What's Next?
 
 Now that this API is [up and running](http://api.cloudylogic.com/), a [client test script](https://github.com/kenlowrie/testclsrest) is available, the next steps are to create some clients to utilize the API.
 
@@ -453,6 +463,6 @@ I will, of course, be publishing the source for all the clients here on [GitHub]
 
 I hope that you've found this project useful, and as always, if you have any questions, please feel free to contact me at [www.kenlowrie.com](http://www.kenlowrie.com/).
 
-#### Summary
+### Summary
 
 This concludes the documentation on the CLS REST API server side code.
