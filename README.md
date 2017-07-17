@@ -150,13 +150,13 @@ The /reels API returns information about one or all demo reels for Cloudy Logic 
 ##### Examples
 
 To return information for all Cloudy Logic demo reels:
-<pre>[http://api.cloudylogic.com/reels/](http://api.cloudylogic.com/reels/)</pre>
+<code>[http://api.cloudylogic.com/reels/](http://api.cloudylogic.com/reels/)</code>
 
 To return information for the latest Cloudy Logic demo reel:
 <pre>[http://api.cloudylogic.com/reels/0/](http://api.cloudylogic.com/reels/0/)</pre>
 
 To return information for the second latest Cloudy Logic demo reel:
-<pre>[http://api.cloudylogic.com/reels/1/](http://api.cloudylogic.com/reels/0/)</pre>
+<pre>[http://api.cloudylogic.com/reels/1/](http://api.cloudylogic.com/reels/1/)</pre>
 
 ##### Sample Return Data
 
