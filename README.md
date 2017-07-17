@@ -43,7 +43,7 @@ The CLS REST API server side is written entire in PHP, and uses JSON encoding to
 
 In the following section, I'll go over each of the APIs, what they return, and how to use them.
 
-#### http://api.cloudylogic.com/versions/[apiname/]
+#### http://api.cloudylogic.com/versions/ [apiname/]
 
 The /versions API returns an array of objects that describe the implemention and data version for each of the CLS REST APIs. 
 
@@ -73,19 +73,58 @@ The /contact-info API returns an array of contact information for Cloudy Logic S
 [http://api.cloudylogic.com/contact-info/](http://api.cloudylogic.com/contact-info/) - Returns contact information for Cloudy Logic
 
 ##### Sample Return Data
-phone
-email
-social-media \[
-	facebook
-	twitter
-	vimeo
-	instagram? - how to add others w/o breaking the api?
-\]
-mailing address
+
+<pre>
+{
+  "dbgObj": {
+    "traceMsgQ": [],
+    "parseOK": true,
+    "request_uri": "/contact-info/",
+    "query_string": null,
+    "restAPIkeys": [
+      "contact-info"
+    ]
+  },
+  "apiVer": {
+    "apiName": "contact-info",
+    "apiVersion": "1.0",
+    "apiDataVersion": "1.0"
+  },
+  "apiObj": {
+    "location": "Cloudy Logic Studios is located between San Antonio and Austin Texas.",
+    "address": {
+      "name": "Cloudy Logic Studios",
+      "street": "123 Anystreet",
+      "city": "Any Town",
+      "state": "TX",
+      "zipcode": "12345"
+    },
+    "email": "info@cloudylogic.com",
+    "phone": "512.555.1234",
+    "socialNetworks": [
+      {
+        "network": "Facebook",
+        "id": "cloudylogic",
+        "url": "https://www.facebook.com/cloudylogic"
+      },
+      {
+        "network": "Twitter",
+        "id": "cloudylogic",
+        "url": "https://twitter.com/cloudylogic"
+      },
+      {
+        "network": "Vimeo",
+        "id": "cloudylogic",
+        "url": "https://vimeo.com/cloudylogic"
+      }
+    ]
+  }
+}
+</pre>
 
 This API returns the contact information for the business. This includes the typical data, such as mailing address, phone and email, as well as the various social media contacts.
 
-#### http://api.cloudylogic.com/reels/[ID#/]
+#### http://api.cloudylogic.com/reels/ [ID#/]
 
 The /reels API returns information about one or all demo reels for Cloudy Logic Studios. If the optional [ID#] is supplied, then the information for that specific demo reel is returned instead. If the ID number provided is invalid, then information about all demo reels is returned.
 
@@ -100,7 +139,7 @@ The /reels API returns information about one or all demo reels for Cloudy Logic 
 
 The intent behind this API is to .
 
-#### http://api.cloudylogic.com/our-work/[ID#/]
+#### http://api.cloudylogic.com/our-work/ [ID#/]
 
 The /our-work API returns an array of objects that describe videos which showcase some of Cloudy Logic Studios' past projects. It can also return more detailed information on a specific video, if it's ID is passed in. 
 
