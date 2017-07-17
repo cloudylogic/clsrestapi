@@ -43,7 +43,7 @@ The CLS REST API server side is written entire in PHP, and uses JSON encoding to
 
 In the following section, I'll go over each of the APIs, what they return, and how to use them.
 
-#### http://api.cloudylogic.com/versions\[/apiname\]/
+#### http://api.cloudylogic.com/versions[/apiname]/
 
 The /versions API returns an array of objects that describe the implemention and data version for each of the CLS REST APIs. 
 
@@ -84,9 +84,9 @@ mailing address
 
 This API returns the contact information for the business. This includes the typical data, such as mailing address, phone and email, as well as the various social media contacts.
 
-#### http://api.cloudylogic.com/reels\[ID\#\]/
+#### http://api.cloudylogic.com/reels[/ID#]/
 
-The /reels API returns information about one or all demo reels for Cloudy Logic Studios. If the optional \[ID\#\] is supplied, then the information for that specific demo reel is returned instead. If the ID number provided is invalid, then information about all demo reels is returned.
+The /reels API returns information about one or all demo reels for Cloudy Logic Studios. If the optional [ID#] is supplied, then the information for that specific demo reel is returned instead. If the ID number provided is invalid, then information about all demo reels is returned.
 
 > **NOTE** An ID of 0 always refers to the "latest" or newest demo reel. 1 refers to the second latest demo reel, and so on.
 
@@ -97,7 +97,7 @@ The /reels API returns information about one or all demo reels for Cloudy Logic 
 
 The intent behind this API is to .
 
-#### http://api.cloudylogic.com/our-work\[ID\#\]/
+#### http://api.cloudylogic.com/our-work[/ID#]/
 
 The /our-work API returns an array of objects that describe videos which showcase some of Cloudy Logic Studios' past projects. It can also return more detailed information on a specific video, if it's ID is passed in. 
 
