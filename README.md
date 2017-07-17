@@ -43,13 +43,14 @@ The CLS REST API server side is written entire in PHP, and uses JSON encoding to
 
 In the following section, I'll go over each of the APIs, what they return, and how to use them.
 
-#### http://api.cloudylogic.com/versions[/apiname]/
+#### http://api.cloudylogic.com/versions/[apiname/]
 
 The /versions API returns an array of objects that describe the implemention and data version for each of the CLS REST APIs. 
 
 ##### Examples
-[http://api.cloudylogic.com/versions](http://api.cloudylogic.com/versions/) - Returns version data for all APIs
-[http://api.cloudylogic.com/versions/reels](http://api.cloudylogic.com/versions/reels/) - Returns version data for the /reels API only
+[http://api.cloudylogic.com/versions/](http://api.cloudylogic.com/versions/) - Returns version data for all APIs
+
+[http://api.cloudylogic.com/versions/reels/](http://api.cloudylogic.com/versions/reels/) - Returns version data for the /reels API only
 
 The intent behind this API is to indicate to a client that has cached prior return data whether or not there is any need to request an update, or if it's okay to simply use the locally cached data.
 
@@ -84,7 +85,7 @@ mailing address
 
 This API returns the contact information for the business. This includes the typical data, such as mailing address, phone and email, as well as the various social media contacts.
 
-#### http://api.cloudylogic.com/reels[/ID#]/
+#### http://api.cloudylogic.com/reels/[ID#/]
 
 The /reels API returns information about one or all demo reels for Cloudy Logic Studios. If the optional [ID#] is supplied, then the information for that specific demo reel is returned instead. If the ID number provided is invalid, then information about all demo reels is returned.
 
@@ -92,12 +93,14 @@ The /reels API returns information about one or all demo reels for Cloudy Logic 
 
 ##### Examples
 [http://api.cloudylogic.com/reels/](http://api.cloudylogic.com/reels/) - Returns information for all Cloudy Logic demo reels.
+
 [http://api.cloudylogic.com/reels/0/](http://api.cloudylogic.com/reels/0/) - Returns information for the latest Cloudy Logic demo reel.
+
 [http://api.cloudylogic.com/reels/1/](http://api.cloudylogic.com/reels/0/) - Returns information for the second latest Cloudy Logic demo reel.
 
 The intent behind this API is to .
 
-#### http://api.cloudylogic.com/our-work[/ID#]/
+#### http://api.cloudylogic.com/our-work/[ID#/]
 
 The /our-work API returns an array of objects that describe videos which showcase some of Cloudy Logic Studios' past projects. It can also return more detailed information on a specific video, if it's ID is passed in. 
 
