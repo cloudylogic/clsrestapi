@@ -33,7 +33,7 @@ The server side of the API is contained in this repository, and the remainder of
 
 #### The Implementation
 
-The CLS REST API server side is written entire in PHP, and uses JSON encoding to expose the data associated with each API call. The APIs available are:
+The CLS REST API server side is written entire in PHP, and uses [JSON](http://www.json.org/) encoding to expose the data associated with each API call. The APIs available are:
 
 1. versions/ - Returns the versions of a specific (or all) API. 
 2. about-us/ - Returns a text description of what Cloudy Logic Studios does.
@@ -151,12 +151,23 @@ The intent behind this API is to .
 #### Additional Information
 
 Talk about looking at the source code for additional information.
-Talk about reviewing the Javascript for the [api.cloudylogic.com] root page
+
 Talk about reviewing the test code written in Java
 Talk about reviewing client code for Python, Java, Kotlin, Javascript and Swift
 
+Take a look at the [index.php](https://github.com/kenlowrie/clsrestapi/blob/master/src/index.php) in the root of this project to see the JavaScript AJAX code that is used to invoke the API when the buttons are pressed. It's part of the manual testing code built-in to the server side of the code, allowing me to quickly test any changes, as well as providing a valuable debug tool for developing client apps that process the JSON return data.
+
 You may want to check out the Python test code for the CLS REST API, that repository, called [testclsrest](https://github.com/kenlowrie/testclsrest) is also available on [GitHub](https://github.com/).
 
+#### What's Next?
+
+Now that this API is [up and running](http://api.cloudylogic.com/), a [client test script](https://github.com/kenlowrie/testclsrest) is available, the next steps are to create some clients to utilize the API.
+
+As I mentioned at the outset, the original intention was to separate the hard-coded data from my iOS app, so that'll definitely be one of the things coming up. However, I think the first thing I'm gonna do is create a JAVA client, to help me make sure the API will be usable in practice, and an added benefit that it'll be the core needed to create an Android app for the Play store.
+
+I will, of course, be publishing the source for all the clients here on [GitHub](https://github.com/), and as soon as the first one is ready, I'll add a new repository and put the link right in here.
+
+I hope that you've found this project useful, and as always, if you have any questions, please feel free to contact me at [www.kenlowrie.com](http://www.kenlowrie.com/).
 
 #### Summary
 
