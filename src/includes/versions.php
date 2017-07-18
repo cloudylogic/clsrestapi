@@ -1,4 +1,5 @@
 <?php
+// This file is covered by the LICENSE file in the root of this project.
 
 /*
 **	Define a bunch of constants for the api names, versions and data versions.

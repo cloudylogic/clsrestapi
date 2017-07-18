@@ -1,4 +1,6 @@
 <?php
+// This file is covered by the LICENSE file in the root of this project.
+
 /*
 **	This file has the implementation of the 'contact-info' API for the CLS REST API
 */
