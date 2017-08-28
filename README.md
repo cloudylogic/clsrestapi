@@ -454,7 +454,7 @@ As I mentioned at the outset, the original intention was to separate the hard-co
 
 I will, of course, be publishing the source for all the clients here on [GitHub](https://github.com/), and as soon as the first one is ready, I'll add a new repository and put the link right in here. My current thinking will be to create clients in the following languages (not in any particular order, except for Java):
 
-1. Java Class Library & Command Line App [jclCLSrest](https://github.com/kenlowrie/jclCLSrest) - Done on 8/27/2017!
+1. Java Class Library & Command Line App &lt;[jclCLSrest](https://github.com/kenlowrie/jclCLSrest) - **Done on 8/27/2017!**&gt;
 2. Java Client - A reference client for macOS and Windows systems
 3. Java Android Client - an Android-specific client, hopefully on the play store
 3. JavaScript - A responsive webapp client 
