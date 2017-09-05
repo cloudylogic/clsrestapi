@@ -51,6 +51,7 @@ class cContactInfoReply extends cBaseReply {
 		$this->apiObj->socialNetworks[] = new cSocialMedia("Facebook", "cloudylogic", "https://www.facebook.com/cloudylogic");
 		$this->apiObj->socialNetworks[] = new cSocialMedia("Twitter", "cloudylogic", "https://twitter.com/cloudylogic");
 		$this->apiObj->socialNetworks[] = new cSocialMedia("Vimeo", "cloudylogic", "https://vimeo.com/cloudylogic");
+		$this->apiObj->socialNetworks[] = new cSocialMedia("Instagram", "cloudylogicstudios", "https://www.instagram.com/cloudylogicstudios");
 	}
 }
 
