@@ -49,10 +49,10 @@ class cImagePathsReply extends cBaseReply {
 		**	contain the specific apiVer object(s) requested.
 		*/
         $this->allImagePathsList = Array();
-        $this->allImagePathsList[] = new cImagePath("jdt",      "/images/jdt/");
-        $this->allImagePathsList[] = new cImagePath("iOS",      "/images/iOS/");
-        $this->allImagePathsList[] = new cImagePath("jaos",     "/images/jaos/");
-        $this->allImagePathsList[] = new cImagePath("kaos",     "/images/kaos/");
+        $this->allImagePathsList[] = new cImagePath("JavaDesktop",      "/images/jdt/");
+        $this->allImagePathsList[] = new cImagePath("iOS",              "/images/iOS/");
+        $this->allImagePathsList[] = new cImagePath("JavaAndroid",      "/images/jaos/");
+        $this->allImagePathsList[] = new cImagePath("KotlinAndroid",    "/images/kaos/");
         
         $this->totPaths = count($this->allImagePathsList);
 
@@ -87,7 +87,7 @@ class cImagePathsReply extends cBaseReply {
     	**	Return ALL of the imagePath objects to our client.
     	*/
         $this->apiObj->imagePaths = $this->allImagePathsList;
-        $this->apiObj->numPaths = totPaths;
+        $this->apiObj->numPaths = $this->totPaths;
     }
 }
 

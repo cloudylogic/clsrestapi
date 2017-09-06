@@ -71,7 +71,7 @@
 			</div>
             <div>
 				<input type="button" class="btn btn-primary" value="image-paths" id="image-paths">
-				<input type="button" class="btn btn-secondary" value="image-paths/jdt" id="image-paths_jdt">
+				<input type="button" class="btn btn-secondary" value="image-paths/iOS" id="image-paths_ios">
 			</div>
             <div>
 				<input type="button" class="btn btn-primary" value="contact-info" id="contact-info">
@@ -123,7 +123,7 @@
         attachRESTapi('#versions', 'versions/');
         attachRESTapi('#versions_reels', 'versions/reels/');
         attachRESTapi('#image-paths', 'image-paths/');
-        attachRESTapi('#image-paths_jdt', 'image-paths/jdt/');
+        attachRESTapi('#image-paths_ios', 'image-paths/iOS/');
         // This function just resets the API return area for convenience
         resetReply('#reset');
     });
