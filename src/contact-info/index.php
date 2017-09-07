@@ -17,13 +17,15 @@ class cSocialMedia {
 	public $network;	// The network name: e.g. Facebook
 	public $id;			// The social media ID for CLS on this network: e.g. cloudylogic
 	public $url;		// The URL for CLS on the network: e.g. https://facebook.com/cloudylogic
+	public $image;      // The name of the image file for this network e.g. social-fb.png
 	/*
 	**	Initialize the object with the passed parameters
 	*/
-	public function __construct($network, $id, $url){
+	public function __construct($network, $id, $url, $image){
 		$this->network = $network;
 		$this->id = $id;
 		$this->url = $url;
+		$this->image = $image;
 	}
 }
 
@@ -48,10 +50,10 @@ class cContactInfoReply extends cBaseReply {
 		$this->apiObj->phone = "512.710.7257";
 		
 		$this->apiObj->socialNetworks = Array();
-		$this->apiObj->socialNetworks[] = new cSocialMedia("Facebook", "cloudylogic", "https://www.facebook.com/cloudylogic");
-		$this->apiObj->socialNetworks[] = new cSocialMedia("Twitter", "cloudylogic", "https://twitter.com/cloudylogic");
-		$this->apiObj->socialNetworks[] = new cSocialMedia("Vimeo", "cloudylogic", "https://vimeo.com/cloudylogic");
-		$this->apiObj->socialNetworks[] = new cSocialMedia("Instagram", "cloudylogicstudios", "https://www.instagram.com/cloudylogicstudios");
+		$this->apiObj->socialNetworks[] = new cSocialMedia("Facebook", "cloudylogic", "https://www.facebook.com/cloudylogic", "social-fb.png");
+		$this->apiObj->socialNetworks[] = new cSocialMedia("Twitter", "cloudylogic", "https://twitter.com/cloudylogic", "social-tw.png");
+		$this->apiObj->socialNetworks[] = new cSocialMedia("Vimeo", "cloudylogic", "https://vimeo.com/cloudylogic", "social-vi.png");
+		$this->apiObj->socialNetworks[] = new cSocialMedia("Instagram", "cloudylogicstudios", "https://www.instagram.com/cloudylogicstudios", "social-ig.png");
 	}
 }
 
