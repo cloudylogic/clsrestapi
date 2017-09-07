@@ -9,23 +9,30 @@ class cVideo {
 	*/
     public $title;	// The title of the video
     public $url;	// The URL of the video on Vimeo
-    public $sUrl;	// The streaming URL of the video on Vimeo
+    public $sUrl;	// The streaming URL of the video on Vimeo (Apple only)
+    public $hdUrl;    // The HD URL on Vimeo
+    public $sdUrl;    // The SD URL on Vimeo
+    public $mobileUrl;    // The Mobile URL on Vimeo
     public $thumb;	// The thumbnail of the video (not yet defined)
     public $frame;	// The frame of the video (not yet defined)
     
-    public function __construct($title, $videoID, $streamID, $thumb, $frame){
+    public function __construct($title, $videoID, $streamID, $hdID, $sdID, $mobileID, $thumb, $frame){
+
     	/*
     	**	Initialize the object with the passed parameters
     	**
     	**	$title - The title
     	**	$videoID - The Vimeo video ID (a number)
     	**	$streamID - The Vimeo stream ID (a long number that identifies the video)
-    	**	$thumb - This will be the thumbnail -- NOT SURE OF IMPLEMENTATION YET
-    	**	$frame - This will be the frame for the video -- NOT SURE OF IMPLEMENTATION YET
+    	**	$thumb - This will be the video thumbnail name - in images/CLIENTID/
+    	**	$frame - This will be the video frame name - in images/CLIENTID/
     	*/
         $this->title = $title;
         $this->url = "https://vimeo.com/$videoID";
-        $this->sUrl = "http://player.vimeo.com/external/$videoID.m3u8?p=high,standard,mobile&amp;s=$streamID";
+        $this->sUrl = "http://player.vimeo.com/external/$videoID.m3u8?s=$streamID";
+        $this->hdUrl = "http://player.vimeo.com/external/$videoID.hd.mp4?s=$hdID";
+        $this->sdUrl = "http://player.vimeo.com/external/$videoID.sd.mp4?s=$sdID";
+        $this->mobileUrl = "http://player.vimeo.com/external/$videoID.mobile.mp4?s=$mobileID";
         $this->thumb = $thumb;
         $this->frame = $frame;
     }
@@ -67,11 +74,12 @@ class cShowcaseVideo extends cVideo {
     public $roles;			// A class object that defines the roles. e.g. Director, Editor, etc.
     public $description;	// A long description of the project.
     
-    public function __construct($title,$vID, $sID, $type, $thumb, $frame, $ro_dir="", $ro_dp="", $ro_cam="", $ro_ed="", $desc=""){
+    public function __construct($title,$vID, $sID, $hdID, $sdID, $mobileID, $type, $thumb, $frame, $ro_dir="", $ro_dp="", $ro_cam="", $ro_ed="", $desc=""){
         /*
         **	Invoke the base class constructor with the passed parameters first.
         */
-        parent::__construct($title,$vID,$sID,$thumb,$frame);
+        parent::__construct($title,$vID,$sID,$hdID,$sdID,$mobileID,$thumb,$frame);
+
 		/*
 		**	Now assign the additional fields with the specified data
 		*/
@@ -102,11 +110,11 @@ class cVideos{
         $this->videoList = Array();
     }
     
-    public function addVideo($title,$videoID,$streamID="vimeoSID", $thumb="thumbnail", $frame="image-frame"){
+    public function addVideo($title,$videoID,$streamID="vimeoSID", $hdID="hdID", $sdID="sdID", $mobileID="mobileID", $thumb="thumbnail", $frame="image-frame"){
         /*
         **	Add a video to the demo reel list.
         */
-        $this->videoList[] = new cVideo($title,$videoID,$streamID,$thumb,$frame);
+        $this->videoList[] = new cVideo($title,$videoID,$streamID,$hdID,$sdID,$mobileID,$thumb,$frame);
     }
     
     public function totalVideos(){
@@ -150,8 +158,9 @@ class cShowcaseVideos extends cVideos {
 	**	addVideo() method to allow the additional items to be specified when new
 	**	videos are added to the list.
 	*/
-    public function addVideo($title, $vID, $sID="vimSID", $type="Generic", $thumb="tn", $frame="fr-img", $ro_dir="Director", $ro_dp="DP", $ro_cam="Camera", $ro_ed="Editor", $desc="Long description"){
-        $this->videoList[] = new cShowcaseVideo($title, $vID, $sID, $type, $thumb, $frame, $ro_dir, $ro_dp, $ro_cam, $ro_ed, $desc);
+	 
+    public function addVideo($title, $vID, $sID="vimSID", $hdID="hdID", $sdID="sdID", $mobileID="mobileID", $type="Generic", $thumb="tn", $frame="fr-img", $ro_dir="Director", $ro_dp="DP", $ro_cam="Camera", $ro_ed="Editor", $desc="Long description"){
+        $this->videoList[] = new cShowcaseVideo($title, $vID, $sID, $hdID, $sdID, $mobileID, $type, $thumb, $frame, $ro_dir, $ro_dp, $ro_cam, $ro_ed, $desc);
     }
 }
 
