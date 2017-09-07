@@ -21,6 +21,7 @@ miscSources = [srcDir + '.htaccess'];
 phpServerSrc = [srcDir + 'gulpfiles/phpserver.js'];
 phpSources = [srcDir + '**/*.php'];
 cssSources = [srcDir + '**/*.css'];
+imgSources = [srcDir + '**/images/*', '**/images/jdt/*'];
 gulpSources = [srcDir + 'gulpfiles/*.js'];
 
 if (env === 'dev'){
@@ -57,9 +58,17 @@ gulp.task('cpmiscsrc', function(){
   	.pipe(gulp.dest(outDir));
 });
 
+gulp.task('cpimages', function(){
+    gulp.src(imgSources,{base: srcDir})
+     .pipe(cached("images"))
+     .pipe(debug())
+     .pipe(gulp.dest(outDir));
+});
+
 gulp.task('watch', function() {
   gulp.watch(cssSources, ['css']);
   gulp.watch(phpSources, ['php']);
+  gulp.watch(imgSources, ['cpimages']);
   gulp.watch(gulpSources,['cpgulpsrc']);
   gulp.watch(miscSources,['cpmiscsrc']);
 });
@@ -84,7 +93,7 @@ gulp.task('cpgulpphpsrv', function(){
 });
 */
 
-var buildtasks=['php', 'css', 'cpgulpsrc', 'cpmiscsrc'];
+var buildtasks=['php', 'css', 'cpgulpsrc', 'cpmiscsrc', 'cpimages'];
 
 gulp.task('build', buildtasks); 
 
