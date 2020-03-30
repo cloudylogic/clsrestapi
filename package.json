@@ -9,15 +9,15 @@
   "author": "Ken Lowrie",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.18.12",
-    "fs-extra": "^3.0.1",
-    "gulp": "^3.9.1",
+    "browser-sync": "^2.26.7",
+    "fs-extra": "^9.0.0",
+    "gulp": "^4.0.2",
     "gulp-cached": "^1.1.1",
-    "gulp-connect-php": "^1.0.1",
-    "gulp-debug": "^3.1.0",
-    "gulp-if": "^2.0.2",
+    "gulp-connect-php": "^1.0.3",
+    "gulp-debug": "^4.0.0",
+    "gulp-if": "^3.0.0",
     "gulp-util": "^3.0.8",
     "gulp-webserver2": "^0.9.2",
-    "vinyl-ftp": "^0.6.0"
+    "vinyl-ftp": "^0.6.1"
   }
 }
