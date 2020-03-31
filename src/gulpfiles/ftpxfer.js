@@ -3,6 +3,7 @@
 var gulp = require('gulp');  
 var gutil = require( 'gulp-util' );  
 var ftp = require( 'vinyl-ftp' );
+var debug = require ('gulp-debug');
 
 /** Configuration **/
 var user = process.env.FTP_USER;  
@@ -10,7 +11,7 @@ var password = process.env.FTP_PWD;
 var host = process.env.FTP_HOST;  
 var port = 21;  
 var localFilesGlob = ['**/*', '.htaccess', '!ftpxfer.js', '!phpserver.js'];  
-var remoteFolder = '/public_html/api'
+var remoteFolder = '/public_html/api';
 
 
 // helper function to build an FTP connection based on our configuration
@@ -36,7 +37,7 @@ gulp.task('ftp-deploy', function() {
     var conn = getFtpConnection();
 
     return gulp.src(localFilesGlob, {base: '.', buffer: false })
-        .pipe( conn.newer( remoteFolder ) ) // only upload newer files 
+        .pipe( conn.newerOrDifferentSize( remoteFolder ) ) // only upload newer files 
         .pipe( conn.dest( remoteFolder ) )
     ;
 });
@@ -52,14 +53,15 @@ gulp.task('ftp-deploy-watch', function() {
     var conn = getFtpConnection();
 
     gulp.watch(localFilesGlob)
-    .on('change', function(event) {
-      console.log('Changes detected! Uploading file "' + event.path + '", ' + event.type);
+    .on('change', function(path, stats) {
+      console.log('Changes detected! Uploading file "' + path + '", ' + stats);
 
-      return gulp.src( [event.path], { base: '.', buffer: false } )
-        .pipe( conn.newer( remoteFolder ) ) // only upload newer files 
+      return gulp.src( [path], { base: '.', buffer: false } )
+        .pipe( conn.newerOrDifferentSize( remoteFolder ) ) // only upload newer files 
+        .pipe(debug())
         .pipe( conn.dest( remoteFolder ) )
       ;
     });
 });
 
-gulp.task('default',['ftp-deploy']);
+gulp.task('default',gulp.series(['ftp-deploy']));

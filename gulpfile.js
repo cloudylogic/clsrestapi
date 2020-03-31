@@ -21,7 +21,7 @@ miscSources = [srcDir + '.htaccess'];
 phpServerSrc = [srcDir + 'gulpfiles/phpserver.js'];
 phpSources = [srcDir + '**/*.php'];
 cssSources = [srcDir + '**/*.css'];
-imgSources = [srcDir + '**/images/*', '**/images/jdt/*'];
+imgSources = [srcDir + '**/images/*', srcDir + '**/images/jdt/*'];
 gulpSources = [srcDir + 'gulpfiles/*.js'];
 
 if (env === 'dev'){
@@ -33,68 +33,51 @@ if (env === 'dev'){
 console.log('Building clsrestapi in ' + env + ' mode to ' + outDir);
 
 gulp.task( 'css', function() {
-	gulp.src(cssSources)
-        .pipe(cached("csscache"))
-		.pipe(gulp.dest(outDir))
+	return gulp.src(cssSources)
+         .pipe(cached("csscache"))
+         .pipe(debug())
+         .pipe(gulp.dest(outDir))
 });
 
 gulp.task('php', function(){
-   gulp.src(phpSources,{base: srcDir})
-    .pipe(cached("phpcache"))
-  	.pipe(gulp.dest(outDir));
+   return gulp.src(phpSources,{base: srcDir})
+          .pipe(cached("phpcache"))
+          .pipe(debug())
+          .pipe(gulp.dest(outDir));
 });
 
 gulp.task('cpgulpsrc', function(){
-   gulp.src(gulpSources)
-    .pipe(cached("gulpcache"))
-    .pipe(debug())
-  	.pipe(gulp.dest(outDir));
+   return gulp.src(gulpSources)
+          .pipe(cached("gulpcache"))
+          .pipe(debug())
+          .pipe(gulp.dest(outDir));
 });
 
 gulp.task('cpmiscsrc', function(){
-   gulp.src(miscSources)
-    .pipe(cached("misccache"))
-    .pipe(debug())
-  	.pipe(gulp.dest(outDir));
+   return gulp.src(miscSources)
+          .pipe(cached("misccache"))
+          .pipe(debug())
+          .pipe(gulp.dest(outDir));
 });
 
 gulp.task('cpimages', function(){
-    gulp.src(imgSources,{base: srcDir})
-     .pipe(cached("images"))
-     .pipe(debug())
-     .pipe(gulp.dest(outDir));
+    return gulp.src(imgSources,{base: srcDir})
+           .pipe(cached("images"))
+           .pipe(debug())
+           .pipe(gulp.dest(outDir));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(cssSources, ['css']);
-  gulp.watch(phpSources, ['php']);
-  gulp.watch(imgSources, ['cpimages']);
-  gulp.watch(gulpSources,['cpgulpsrc']);
-  gulp.watch(miscSources,['cpmiscsrc']);
+gulp.task('watch', function(done) {
+  gulp.watch(cssSources, gulp.series(['css']));
+  gulp.watch(phpSources, gulp.series(['php']));
+  gulp.watch(imgSources, gulp.series(['cpimages']));
+  gulp.watch(gulpSources,gulp.series(['cpgulpsrc']));
+  gulp.watch(miscSources,gulp.series(['cpmiscsrc']));
+  done();
 });
-
-/*
-gulp.task('webserver', function() {
-  gulp.src(outDir)
-    .pipe(webserver({
-      livereload: true,
-      open: true
-    }));
-});
-
-gulp.task('cpgulpphpsrv', function(){
-/*   gulp.src(ftpXferSrc)
-   	.pipe(debug())
-  	.pipe(gulp.dest(outDir));
-
-    gulp.src(phpServerSrc)
-   	.pipe(debug())
-  	.pipe(gulp.dest(bldRoot));
-});
-*/
 
 var buildtasks=['php', 'css', 'cpgulpsrc', 'cpmiscsrc', 'cpimages'];
 
-gulp.task('build', buildtasks); 
+gulp.task('build', gulp.series(buildtasks)); 
 
-gulp.task('default', buildtasks.concat(['watch']));
+gulp.task('default', gulp.parallel(buildtasks.concat(['watch'])));

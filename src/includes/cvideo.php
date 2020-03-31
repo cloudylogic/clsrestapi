@@ -42,25 +42,37 @@ class cVideo {
     **	data is public so these are not required, I want to use them when accessing the
     **	instance data because that's just a better way to do it. If it weren't for the
     **	fact that json_encode requires things you want encoded to be declared public,
-    **	then I would have defined them as private instead.
+    **	then I would have defined them as private instead
     */
-	public function getTitle(){
+	public function get_title(){
 		return $this->title;
 	}
 	
-	public function getUrl(){
+	public function get_url(){
 	    return $this->url;
 	}
 	
-	public function getSurl(){
+	public function get_sUrl(){
 	    return $this->sUrl;
 	}
 	
-	public function getThumb(){
+	public function get_hdUrl(){
+	    return $this->hdUrl;
+	}
+	
+	public function get_sdUrl(){
+	    return $this->sdUrl;
+	}
+	
+	public function get_mobileUrl(){
+	    return $this->mobileUrl;
+	}
+	
+	public function get_thumb(){
 	    return $this->thumb;
 	}
 	
-	public function getFrame(){
+	public function get_frame(){
 	    return $this->frame;
 	}
 }

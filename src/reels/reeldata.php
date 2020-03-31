@@ -15,6 +15,14 @@ function getDemoReels()
 	$demoReels = new cVideos();
 
 	$demoReels->addVideo( "Cloudy Logic Demo Reel", 
+	                      "323322044",
+	                      "0d72a622e48a7a6b9b829959e48c19a0405d315a",
+                          "4b8fcf9fdc66d0d0ef0cbb1ad0ef1a1e726e7511&amp;profile_id=174",
+                          "827a9ca9df9bbdfba1b0b5d6b3e04475325123db&amp;profile_id=165",
+                          "827a9ca9df9bbdfba1b0b5d6b3e04475325123db&amp;profile_id=164",
+	                      "img-dr2019.png",
+	                      "frame-dr2019.png");
+  	$demoReels->addVideo( "Cloudy Logic Demo Reel 2016", 
 	                      "176516244",
 	                      "499384905879d9a25a637fb60dfda1f7420f8f22",
                           "115f38a327640774d5e9ac32895e79511a5d8f2e&amp;profile_id=174",

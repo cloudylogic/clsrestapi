@@ -35,17 +35,27 @@ gulp.task('override-auth', function(){
 gulp.task('php', ['override-auth'], function() {
 */
 
-var srcDir = '../../src/'
+var srcDir = '../../src/';
 
-gulp.task('php', [], function() {
+gulp.task('php', function() {
 	console.log("about to start php.server()\r\n");
     php.server({}, function () {
         browserSync({ proxy: '127.0.0.1:8000'});
-    });
+	});
     
-    gulp.watch([srcDir + '*',srcDir + 'css/*', srcDir + 'reels/*', srcDir + 'about-us/*',srcDir + 'our-work/*', srcDir + 'contact-info/*']).on('change', function () {
+	gulp.watch(	[
+					srcDir + '*',
+					srcDir + 'css/*', 
+					srcDir + 'reels/*', 
+					srcDir + 'about-us/*',
+					srcDir + 'our-work/*', 
+					srcDir + 'versions/*', 
+					srcDir + 'contact-info/*',
+					srcDir + 'images/*',
+					srcDir + 'includes/*'
+				]).on('change', function () {
         browserSync.reload('');
-    });
+	});
 });
 
-gulp.task('default', ['php']);
+gulp.task('default', gulp.series(['php']));
